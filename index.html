@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pedro's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Geist:wght@100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    .navbar-scrolled {
+      box-shadow: 0 4px 24px 0 rgba(159, 159, 159, 0.144);
+      border-color: #262626 !important;
+      background: #000000 !important;
+      transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
+    }
+
+    .font-geist {
+      font-family: 'Geist', sans-serif;
+    }
+
+    .font-exo2 {
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    .glow-button {
+      &:hover {
+        box-shadow: 0 0 15px #ffffffb9;
+      }
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    @keyframes marquee-reverse {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-marquee {
+      animation: marquee 22s linear infinite;
+    }
+
+    .animate-marquee-reverse {
+      animation: marquee-reverse 22s linear infinite;
+    }
+
+    @keyframes marquee-gray {
+      0% {
+        transform: translateX(-60%);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(0%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes marquee-reverse-gray {
+      0% {
+        transform: translateX(0%);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(-60%);
+        opacity: 0;
+      }
+    }
+
+    .animate-marquee-gray {
+      animation: marquee-gray 26s linear infinite;
+    }
+
+    .animate-marquee-reverse-gray {
+      animation: marquee-reverse-gray 26s linear infinite;
+    }
+
+    @keyframes rainbow-bg {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .group-hover\:animate-rainbow-bg:hover {
+      animation: rainbow-bg 2s linear infinite;
+    }
+
+    .rainbow-border {
+      position: relative;
+      z-index: 0;
+      transition: border-color 0.3s;
+    }
+
+    .rainbow-border::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      background: white;
+      filter: blur(9px);
+    }
+
+    .rainbow-border:hover::after {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen flex-col bg-black text-gray-300 font-geist">
+
+  <nav class="fixed top-4 z-50 w-full lg:top-6">
+    <div class="container mx-auto box-border !max-w-[1672px] !px-6 md:!px-9">
+      <div id="navbar"
+        class="relative flex h-[64px] w-full items-center justify-between rounded-lg border border-transparent bg-black px-2 py-1.5 transition-[box-shadow_background-color_border-color] duration-300 motion-reduce:transition-none lg:grid lg:grid-cols-[1fr_auto_1fr] lg:rounded-2xl lg:py-[0.4375rem] lg:pr-[0.4375rem]">
+        <a href="#" class="relative flex w-fit items-center gap-2 overflow-hidden lg:px-3">
+          <span class="text-xl font-bold text-white font-exo2 flex items-center"><i class="ri-at-line"></i>Pedro
+            Casseb</span>
+          <span class="relative flex h-3 w-3 ml-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span
+              class="relative inline-flex rounded-full h-3 w-3 bg-green-500 shadow-[0_0_8px_2px_rgba(34,197,94,0.7)]"></span>
+          </span>
+        </a>
+        <ul class="col-start-2 gap-5 px-2 font-medium text-grey-300 xl:gap-6 hidden lg:flex">
+          <li><a href="#about"
+              class="p-2 lg:hover:text-white lg:hover:bg-[rgb(26,26,26)] lg:rounded-md transition-colors duration-300">About</a>
+          </li>
+          <li><a href="#skills"
+              class="p-2 lg:hover:text-white lg:hover:bg-[rgb(26,26,26)] lg:rounded-md transition-colors duration-300">Skills</a>
+          </li>
+          <li><a href="#experience"
+              class="p-2 lg:hover:text-white lg:hover:bg-[rgb(26,26,26)] lg:rounded-md transition-colors duration-300">Experience</a>
+          </li>
+          <li><a href="#contact"
+              class="p-2 lg:hover:text-white lg:hover:bg-[rgb(26,26,26)] lg:rounded-md transition-colors duration-300">Contact</a>
+          </li>
+        </ul>
+        <!-- NAVBAR BUTTON -->
+        <div class="col-start-3 hidden w-full justify-end gap-2 lg:flex">
+          <button id="hire-me-nav"
+            class="relative inline-flex items-center justify-center whitespace-nowrap rounded-lg disabled:pointer-events-none disabled:opacity-50 overflow-hidden transition-[color,background-color,border-color,opacity] before:absolute before:-inset-0 after:absolute after:inset-0 motion-reduce:transition-none style_secondary__ItJ5o bg-transparent text-white border-[0.5px] duration-500 border-gray-500 hover:border-white after:transition-colors after:duration-300 md:px-4 md:py-3.5 font-medium text-sm/[1.125rem] tracking-normal">
+            <span class="relative z-10 flex">Hire Me</span>
+          </button>
+          <button
+            class="relative inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-white text-black disabled:pointer-events-none disabled:opacity-50 overflow-hidden transition-[color,background-color,border-color,opacity] after:absolute after:inset-0 motion-reduce:transition-none style_default__4akO1 style_textShadow__jRTCI bg-black duration-500 text-black hover:bg-gray-300 after:bg-gradient-to-t after:from-brand-neutrals-800 after:to-brand-neutrals-600 dark:after:from-brand-neutrals-100 dark:after:to-brand-neutrals-100 before:bg-[radial-gradient(circle_100px_at_var(--mask-x)_var(--mask-y),_var(--tw-gradient-stops))] before:from-brand-neutrals-700 before:via-brand-neutrals-700 before:to-transparent dark:before:from-brand-neutrals-300 after:transition-[color,background-color,border-color,opacity] after:duration-300 before:transition-opacity before:duration-1000 hover:before:opacity-100 before:opacity-0 before:absolute before:inset-0 md:px-4 md:py-3.5 font-medium text-sm/[1.125rem] tracking-normal">
+            <span class="relative z-10 flex">
+              <span class="flex items-center gap-3">
+                <i class="ri-upload-2-fill"></i> Get CV
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <button id="menu-toggle"
+    class="lg:hidden p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white transition-colors fixed top-6 right-6 md:right-10 z-[60]">
+    <i id="icon-menu" class="ri-menu-line text-3xl"></i>
+    <i id="icon-close" class="ri-close-line text-3xl hidden"></i>
+  </button>
+
+  <main class="flex flex-1 flex-col">
+    <div class="home page flex flex-col gap-24 !pt-0 md:gap-56">
+      <div>
+        <section id="about"
+          class="container-full min-h-[40rem] md:max-h-[min(80rem, 300vw)] md:min-h-[48rem] md:h-svh px-4 pb-4 pt-[110px] text-white md:px-6 md:pb-6 lg:pt-[126px] mb-18 md:mb-28"">
+                    <div class=" relative flex flex-col justify-start mx-auto gap-4 pt-12 h-full max-w-[1808px]
+          overflow-hidden rounded-2xl text-center md:justify-between md:gap-6 md:px-10 md:pt-24">
+          <div class="pointer-events-none absolute left-0 top-0 bg-cover bg-center"
+            style='height:100%;width:100%;background-image:image-set(url("/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgradient-hero-prerender.3af0e196.webp&w=1536&q=75") 1x, url("/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgradient-hero-prerender.3af0e196.webp&w=3840&q=75") 2x)'>
+          </div>
+          <img class="absolute left-0 top-0 h-full w-full object-cover blur-xl" width="1464" height="687"
+            style="color:transparent" sizes="70vw" src="/assets/gradient-hero-prerender.webp">
+          <div class="absolute left-0 top-0 h-full w-full bg-[rgba(0,0,0,0.3)]" width="1464" height="678" size="70vw">
+          </div>
+          <div class="relative z-9 px-4 md:px-6">
+            <h1
+              class="text-[8rem] font-semibold leading-none -tracking-4 text-balance !text-[clamp(3.625rem,_1.6250rem_+_8.3333vw,_128px)] !leading-[0.95]">
+              Software Engineer</h1>
+          </div>
+          <div class="relative z-9 mb-6 px-4 md:mb-4 md:px-0">
+            <p
+              class="[&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.25rem] md:text-1.5xl/[1.6875rem] !text-balance [&>br]:hidden sm:[&>br]:inline">
+              Software Engineer | Full-Stack Developer | System Architecture & Clean Code</p>
+          </div>
+          <!-- SECTION BUTTON -->
+          <div
+            class="absolute bottom-0 left-0 z-40 mx-auto flex w-full flex-col justify-center gap-2 px-5 md:static md:flex-row md:gap-4 md:mb-4">
+            <button
+              class="glow-button bg-white text-black rounded-lg px-6 py-3 -outline-offset-2 border border-white/30 flex flex-col gap-2 duration-300">Get
+              CV</button>
+            <button id="hire-me-section"
+              class="glow-button rounded-lg px-6 py-3 -outline-offset-2 border border-white/30 flex flex-col hover:border-white duration-300">Hire
+              Me</button>
+          </div>
+          <div class="z-10 w-full max-w-[1180px] flex-1 px-2 flex items-end relative mx-auto md:px-0">
+            <div class="overflow-hidden rounded-md w-full">
+              <div class="md:hidden">
+                <img src="/assets/code2.jpeg"
+                  class="hidden aspect-square pointer-events-none relative mx-auto h-auto w-full select-none object-cover object-left-top dark:block"
+                  alt="">
+              </div>
+              <div class="hidden md:block">
+                <img src="/assets/code2.jpeg" alt=""
+                  class="hidden aspect-square pointer-events-none relative mx-auto h-auto w-full select-none object-cover  md:aspect-[initial] md:object-contain md:object-bottom dark:block">
+              </div>
+            </div>
+          </div>
+      </div>
+      </section>
+      <section id="skills"
+        class="container mx-auto flex flex-col items-center justify-center gap-8 md:gap-10 lg:gap-16 text-grey-800 lg:max-w-[1120px] mb-16 md:mb-44">
+        <p
+          class="[&_b]:md:font-semibold [&_strong]:md:font-semibold text-sm/[0.875rem] tracking-4 md:text-sm/[1.25rem] text-center font-exo2 uppercase text-gray-400">
+          Some of my skills.
+        </p>
+
+        <div class="relative overflow-x-hidden w-full">
+          <div class="flex gap-12 animate-marquee whitespace-nowrap">
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-html5-line"></i>HTML</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-css3-line"></i>CSS</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-javascript-line"></i>JavaScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-reactjs-line"></i>React</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-nextjs-line"></i>Next.js</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-tailwind-css-line"></i>Tailwind</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-code-s-slash-line"></i>TypeScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-java-line"></i>Java</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-database-2-line"></i>MongoDB</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-git-branch-line"></i>Git</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-html5-line"></i>HTML</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-css3-line"></i>CSS</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-javascript-line"></i>JavaScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-reactjs-line"></i>React</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-nextjs-line"></i>Next.js</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-tailwind-css-line"></i>Tailwind</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-code-s-slash-line"></i>TypeScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-java-line"></i>Java</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-database-2-line"></i>MongoDB</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-git-branch-line"></i>Git</span>
+          </div>
+          <div class="pointer-events-none absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-black to-transparent">
+          </div>
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-black to-transparent">
+          </div>
+        </div>
+
+        <div class="relative overflow-x-hidden w-full">
+          <div class="flex gap-12 animate-marquee-reverse whitespace-nowrap">
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-git-branch-line"></i>Git</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-database-2-line"></i>MongoDB</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-java-line"></i>Java</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-code-s-slash-line"></i>TypeScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-tailwind-css-line"></i>Tailwind</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-nextjs-line"></i>Next.js</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-reactjs-line"></i>React</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-javascript-line"></i>JavaScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-css3-line"></i>CSS</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-html5-line"></i>HTML</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-git-branch-line"></i>Git</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-database-2-line"></i>MongoDB</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-java-line"></i>Java</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-code-s-slash-line"></i>TypeScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-tailwind-css-line"></i>Tailwind</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-nextjs-line"></i>Next.js</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-reactjs-line"></i>React</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-javascript-line"></i>JavaScript</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-css3-line"></i>CSS</span>
+            <span class="flex items-center gap-2 text-gray-400 text-xl font-semibold"><i
+                class="ri-html5-line"></i>HTML</span>
+          </div>
+          <div class="pointer-events-none absolute left-0 top-0 h-full w-40 bg-gradient-to-r from-black to-transparent">
+          </div>
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-black to-transparent">
+          </div>
+        </div>
+      </section>
+      <section id="experience" class="container flex flex-col gap-16 md:gap-36 mx-auto mb-16 md:mb-44">
+        <div class="flex flex-col gap-4 text-center max-w-[90%] w-full mx-auto">
+          <h2 class="text-[3rem] leading-[3.375rem] font-semibold -tracking-4">Experience</h2>
+          <p
+            class="[&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.25rem] md:text-1.5xl/[1.6875rem] !text-balance text-gray-200 ">
+            I didn't have the chance to work in a company yet, but I have been working on personal projects...
+          </p>
+        </div>
+        <ul class="container flex flex-col gap-6 md:gap-8 lg:grid lg:grid-cols-3 lg:gap-4 cursor-pointer">
+          <li>
+            <div
+              class="rainbow-border border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between">
+              <div
+                class="rounded-lg border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between ">
+                <div class="flex flex-col gap-6 p-6 md:p-8">
+                  <h3 class="text-[2rem] leading-[2.625rem] font-semibold -tracking-4">Front-end</h3>
+                  <div class="min-h-18">
+                    <p class="class= [&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.125rem]
+                      md:text-lg/[1.5rem] !text-pretty text-brand-gray-200">
+                      I have hands-on experience with frontend technologies such as HTML, CSS, JavaScript, React,
+                      Next.js, Tailwind CSS, and other modern tools in the web development ecosystem.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rainbow-border border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between">
+              <div
+                class="rounded-lg border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between ">
+                <div class="flex flex-col gap-6 p-6 md:p-8">
+                  <h3 class="text-[2rem] leading-[2.625rem] font-semibold -tracking-4">Back-end</h3>
+                  <div class="min-h-18">
+                    <p class="class= [&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.125rem]
+                      md:text-lg/[1.5rem] !text-pretty text-brand-gray-200">
+                      I'm currently specializing in backend development with Java and Node.js, focusing on building
+                      scalable RESTful APIs using frameworks like Spring Boot and Express.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rainbow-border border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between">
+              <div
+                class="rounded-lg border border-zinc-900 bg-[#0c0c0c] md:rounded-2xl relative flex h-full flex-col justify-between ">
+                <div class="flex flex-col gap-6 p-6 md:p-8">
+                  <h3 class="text-[2rem] leading-[2.625rem] font-semibold -tracking-4">Others</h3>
+                  <div class="min-h-18">
+                    <p class="class= [&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.125rem]
+                      md:text-lg/[1.5rem] !text-pretty text-brand-gray-200">
+                      I'm also working with version control tools like Git and GitHub, exploring databases such as
+                      MongoDB, and gaining experience with design tools like Figma.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section id="contact" class="container mx-auto mb-16 md:mb-44 lg:max-w-[1120px]">
+        <div class="flex flex-col gap-4 text-center max-w-[90%] w-full mx-auto mb-28">
+          <h2 class="text-[3rem] leading-[3.375rem] font-semibold -tracking-4">Contact Me</h2>
+          <p
+            class="[&_b]:md:font-semibold [&_strong]:md:font-semibold text-base/[1.25rem] md:text-1.5xl/[1.6875rem] !text-balance text-gray-200 ">
+            If you have any questions, want to collaborate, or just want to say hi, feel free to reach out!
+          </p>
+        </div>
+        <div
+          class="relative justify-between group rounded-lg border border-zinc-900 bg-[#0c0c0c] p-6 flex flex-row gap-8 md:gap-26 md:rounded-3xl md:p-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:px-18 lg:py-16 motion-reduce:transition-none">
+        </div>
+      </section>
+    </div>
+    </div>
+  </main>
+
+  <div id=" mobile-menu" class="fixed inset-0 bg-black bg-opacity-95 z-50 flex flex-col items-center justify-center gap-10
+         opacity-0 pointer-events-none scale-95 transition-all duration-500 ease-in-out
+         lg:hidden">
+    <ul class="flex flex-col gap-8 text-2xl font-semibold w-full items-center">
+      <li><a href="#about" class="transition-none p-2">About</a></li>
+      <li><a href="#skills" class="transition-none p-2">Skills</a></li>
+      <li><a href="#experience" class="transition-none p-2">Experience</a></li>
+      <li><a href="#contact" class="transition-none p-2">Contact</a></li>
+    </ul>
+  </div>
+
+  <div id="contact-modal"
+    class="fixed inset-0 z-[999] bg-black/70 flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none scale-95">
+    <div class="bg-[#181818] rounded-xl p-8 max-w-sm w-full shadow-2xl flex flex-col gap-6 relative">
+      <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl">
+        <i class="ri-close-line"></i>
+      </button>
+      <h3 class="text-xl font-semibold text-white mb-2">Contact Me</h3>
+      <form class="flex flex-col gap-4" action="https://formsubmit.co/casseb.phcc@gmail.com" method="POST">
+        <input type="text" placeholder="Your name" name="name" required
+          class="rounded-md px-4 py-2 bg-black/40 text-gray-200 border border-gray-700 focus:outline-none focus:border-white" />
+        <input type="email" placeholder="Your email" name="email" required
+          class="rounded-md px-4 py-2 bg-black/40 text-gray-200 border border-gray-700 focus:outline-none focus:border-white" />
+        <textarea placeholder="Your message" rows="4" name="message" required
+          class="rounded-md px-4 py-2 bg-black/40 text-gray-200 border border-gray-700 focus:outline-none focus:border-white"></textarea>
+        <button type="submit"
+          class="glow-button bg-white text-black rounded-lg px-4 py-2 font-semibold border border-white/30 duration-300">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+    });
+
+    // Função para abrir o modal de contato
+    function openContactModal(e) {
+      e.preventDefault();
+      // Fecha o menu mobile se estiver aberto
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconMenu = document.getElementById('icon-menu');
+      const iconClose = document.getElementById('icon-close');
+      if (mobileMenu && mobileMenu.classList.contains('opacity-100')) {
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        if (iconMenu && iconClose) {
+          iconMenu.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+        document.body.classList.remove('overflow-hidden');
+      }
+      // Abre o modal de contato
+      const modal = document.getElementById('contact-modal');
+      modal.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+      modal.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+    }
+
+    // Adiciona evento apenas aos dois botões necessários
+    document.getElementById('hire-me-nav')?.addEventListener('click', openContactModal);
+    document.getElementById('hire-me-section')?.addEventListener('click', openContactModal);
+
+    // Fecha o modal
+    document.getElementById('close-modal').addEventListener('click', function () {
+      const modal = document.getElementById('contact-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      modal.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+    });
+
+    // Fecha ao clicar fora do modal
+    document.getElementById('contact-modal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        this.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        this.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+      }
+    });
+
+    // Bloqueia/desbloqueia rolagem ao abrir/fechar menu mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('opacity-100');
+      if (isOpen) {
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        iconMenu.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      } else {
+        mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+        iconMenu.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        iconMenu.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      });
+    });
+  </script>
+</body>
+
+</html>
